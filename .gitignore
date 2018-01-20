@@ -24,7 +24,7 @@ lib/
 
 ############king###############################33
 # map
-*_map.bin
+*.bin
 # ORBvoc.txt.tar.gz
 ORBvoc.txt.tar.gz
 
