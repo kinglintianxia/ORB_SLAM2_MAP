@@ -171,28 +171,28 @@ void PangolinViewer::Run()
     SetFinish();
 }
 
-void PangolinViewer::UpdateFrame(Tracking *pTracker) {
-  mpFrameDrawer->Update(pTracker);
-}
+//void PangolinViewer::UpdateFrame(Tracking *pTracker) {
+//  mpFrameDrawer->Update(pTracker);
+//}
 
-void PangolinViewer::SetCurrentCameraPose(const cv::Mat &Tcw) {
-  mpMapDrawer->SetCurrentCameraPose(Tcw);
-}
+//void PangolinViewer::SetCurrentCameraPose(const cv::Mat &Tcw) {
+//  mpMapDrawer->SetCurrentCameraPose(Tcw);
+//}
 
-void PangolinViewer::Register(System* pSystem) {
-  cout << "####in PangolinViewer register" << endl;
-  mpSystem = pSystem;
-  mpMapDrawer->Register(pSystem->GetMap());
-  mpFrameDrawer->Register(pSystem->GetMap());
-}
+//void PangolinViewer::Register(System* pSystem) {
+//  cout << "####in PangolinViewer register" << endl;
+//  mpSystem = pSystem;
+//  mpMapDrawer->Register(pSystem->GetMap());
+//  mpFrameDrawer->Register(pSystem->GetMap());
+//}
 
 void PangolinViewer::RegisterMap(Map* map) {
   mpMapDrawer->Register(map);
 }
 
-void PangolinViewer::Finalize(void) {
-  pangolin::BindToContext("ORB-SLAM2: Map Viewer");
-}
+//void PangolinViewer::Finalize(void) {
+//  pangolin::BindToContext("ORB-SLAM2: Map Viewer");
+//}
 
 
 }

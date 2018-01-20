@@ -54,11 +54,11 @@ class PangolinViewer : public Viewer {
 
     //void Release();
 
-	void UpdateFrame(Tracking *pTracker);
-	void SetCurrentCameraPose(const cv::Mat &Tcw);
-	void Register(System* pSystem);
+//	void UpdateFrame(Tracking *pTracker);
+//	void SetCurrentCameraPose(const cv::Mat &Tcw);
+//	void Register(System* pSystem);
 	void RegisterMap(Map* map);
-	void Finalize(void);
+//	void Finalize(void);
 
 private:
 

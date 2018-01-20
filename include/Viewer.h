@@ -40,6 +40,8 @@ class System;
 class Viewer
 {
 public:
+    // king: for map viewer
+    Viewer(Map *pMap, const std::string& setting_file);
     Viewer(System* pSystem, FrameDrawer* pFrameDrawer, MapDrawer* pMapDrawer, Tracking *pTracking, const string &strSettingPath, bool bOnlyTracking);
 
     // Main thread function. Draw points, keyframes, the current camera pose and the last processed

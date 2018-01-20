@@ -128,3 +128,7 @@ target_link_libraries(bin_vocabulary ${PROJECT_NAME})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/test)
 add_executable(test_relocalization test/test_relocalization.cc)
 target_link_libraries(test_relocalization ${PROJECT_NAME})
+# view map
+add_executable(map_viewer test/map_viewer.cpp)
+target_link_libraries(map_viewer ${PROJECT_NAME})
+

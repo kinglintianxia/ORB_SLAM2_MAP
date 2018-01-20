@@ -26,6 +26,34 @@
 namespace ORB_SLAM2
 {
 
+Viewer::Viewer(Map* pMap, const std::string & setting_file):
+  mbFinishRequested(false), mbStopped(false), mbStopRequested(false)
+{
+    mpFrameDrawer = new FrameDrawer();
+    mpMapDrawer = new MapDrawer(pMap, setting_file);
+    cv::FileStorage fSettings(setting_file, cv::FileStorage::READ);
+    float fps = fSettings["Camera.fps"];
+    if(fps<1)
+        fps=30;
+    mT = 1e3/fps;
+
+    mImageWidth = fSettings["Camera.width"];
+    mImageHeight = fSettings["Camera.height"];
+    if(mImageWidth<1 || mImageHeight<1)
+    {
+        mImageWidth = 640;
+        mImageHeight = 480;
+    }
+
+    mViewpointX = fSettings["Viewer.ViewpointX"];
+    mViewpointY = fSettings["Viewer.ViewpointY"];
+    mViewpointZ = fSettings["Viewer.ViewpointZ"];
+    mViewpointF = fSettings["Viewer.ViewpointF"];
+    mInitLocalizationMode = false;
+    cout << "---in PangolinViewer contructor" << endl;
+
+}
+
 Viewer::Viewer(System* pSystem, FrameDrawer *pFrameDrawer, MapDrawer *pMapDrawer, Tracking *pTracking, const string &strSettingPath, bool bOnlyTracking):
     mpSystem(pSystem), mpFrameDrawer(pFrameDrawer),mpMapDrawer(pMapDrawer), mpTracker(pTracking),
     mbFinishRequested(false), mbFinished(true), mbStopped(true), mbStopRequested(false)
@@ -58,7 +86,7 @@ void Viewer::Run()
     mbFinished = false;
     mbStopped = false;
 
-    pangolin::CreateWindowAndBind("ORB-SLAM2: Map Viewer",1024,768);
+    pangolin::CreateWindowAndBind("ORB-SLAM2: Map Viewer",1024,768);    // 1024,768
 
     // 3D Mouse handler requires depth testing to be enabled
     glEnable(GL_DEPTH_TEST);

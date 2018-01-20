@@ -40,6 +40,9 @@ class Viewer;
 class FrameDrawer
 {
 public:
+    // king: for view map
+    FrameDrawer();
+    //
     FrameDrawer(Map* pMap);
 
     // Update info from the last processed frame.

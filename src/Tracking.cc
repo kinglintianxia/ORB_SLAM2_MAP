@@ -1586,7 +1586,7 @@ void Tracking::Reset()
     if(mpViewer)
         mpViewer->Release();
     // king
-    mpSystem->LoadMap("./tum3_map.bin");
+//    mpSystem->LoadMap("./tum3_map.bin");
 }
 
 void Tracking::ChangeCalibration(const string &strSettingPath)
