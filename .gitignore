@@ -23,8 +23,16 @@ build/
 lib/
 
 ############king###############################33
-# map
+####### map
+map/
+map.bin
 *.bin
+
+####### evaluation
+*.zip
+pykitti/
+dataset
+
 # ORBvoc.txt.tar.gz
 ORBvoc.txt.tar.gz
 
