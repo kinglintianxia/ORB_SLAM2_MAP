@@ -248,10 +248,9 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &imRGB,const cv::Mat &imD, const d
 //    for (auto cf: cand)
 //        cerr << cf->mnId << " ";
 //    cerr << ")" << endl;
-    // test
-    std::cout << "test track..." << std::endl;
+
     Track();
-    std::cout << "track OK..." << std::endl;
+
     return mCurrentFrame.mTcw.clone();
 }
 
@@ -287,7 +286,7 @@ cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp)
 
 void Tracking::Track()
 {
-    if(mState==NO_IMAGES_YET)
+    if(mState==NO_IMAGES_YET)   // mState (NO_IMAGES_YET ->  NOT_INITIALIZED -> OK/LOST); mState=bOK
     {
         mState = NOT_INITIALIZED;
     }
@@ -456,7 +455,7 @@ void Tracking::Track()
                 cv::Mat LastTwc = cv::Mat::eye(4,4,CV_32F);
                 mLastFrame.GetRotationInverse().copyTo(LastTwc.rowRange(0,3).colRange(0,3));
                 mLastFrame.GetCameraCenter().copyTo(LastTwc.rowRange(0,3).col(3));
-                mVelocity = mCurrentFrame.mTcw*LastTwc;
+                mVelocity = mCurrentFrame.mTcw*LastTwc; // mVelocity =  Tc*Tl.inverse()
             }
             else
                 mVelocity = cv::Mat();
@@ -484,7 +483,7 @@ void Tracking::Track()
             mlpTemporalPoints.clear();
 
             // Check if we need to insert a new keyframe
-            if(NeedNewKeyFrame())
+            if(NeedNewKeyFrame())   // if(mbOnlyTracking) return false;
                 CreateNewKeyFrame();
 
             // We allow points with high innovation (considererd outliers by the Huber Function)
@@ -801,11 +800,9 @@ bool Tracking::TrackReferenceKeyFrame()
         return false;
 
     mCurrentFrame.mvpMapPoints = vpMapPointMatches;
-    // test
-    std::cout << "test SetPose ..." << std::endl;
+
     mCurrentFrame.SetPose(mLastFrame.mTcw);
-    // test
-    std::cout << "SetPose OK..." << std::endl;
+
     Optimizer::PoseOptimization(&mCurrentFrame);
 
     // Discard outliers
