@@ -24,7 +24,7 @@
 #include "Converter.h"
 #include <thread>
 #include <pangolin/pangolin.h>
-#include <iomanip>
+#include <iomanip>  // std::setprecision
 
 // king: for binary voc
 bool has_suffix(const std::string& str, const std::string& suffix)
@@ -136,6 +136,7 @@ cv::Mat System::TrackStereo(const cv::Mat &imLeft, const cv::Mat &imRight, const
     }   
 
     // Check mode change
+    // king: for every input image, check
     {
         unique_lock<mutex> lock(mMutexMode);
         if(mbActivateLocalizationMode)  // Localization Mode
@@ -266,8 +267,8 @@ cv::Mat System::TrackMonocular(const cv::Mat &im, const double &timestamp)
                 usleep(1000);
             }
 
-            mpTracker->InformOnlyTracking(true);
-            mbActivateLocalizationMode = false;
+            mpTracker->InformOnlyTracking(true);    // 定位时，只跟踪
+            mbActivateLocalizationMode = false; // 防止重复执行
         }
         if(mbDeactivateLocalizationMode)
         {

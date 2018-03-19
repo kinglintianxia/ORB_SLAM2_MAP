@@ -33,6 +33,11 @@ map.bin
 pykitti/
 dataset
 
+####### test & tools binary output
+/test/map_viewer
+tools/test_relocalization
+test/bin_vocabulary
+
 # ORBvoc.txt.tar.gz
 ORBvoc.txt.tar.gz
 
@@ -88,3 +93,5 @@ Vocabulary
 # shell
 *.sh~
 
+# Pangolin
+Thirdparty/Pangolin/build
